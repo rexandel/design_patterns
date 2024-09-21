@@ -14,7 +14,7 @@ end
 
 def sum_of_prime_divisors(number)
 	total = 0
-	for divisor in 2...number
+	for divisor in 2..number
 		if number % divisor == 0 and is_prime?(divisor)
 			total += divisor
 		end
