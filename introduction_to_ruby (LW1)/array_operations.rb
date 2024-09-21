@@ -74,14 +74,16 @@ end
 
 def read_array_from_file(filename)
 	begin
-		content = File.read(filename).chomp.gsub(";", "").gsub(",", "")	
-		array = content.split
-		
-		for index in 0...array.length
-			array[index] = array[index].to_i
+		File.open(filename, "r") do |file| 
+			content = file.read.chomp.gsub(";", "").gsub(",", "")
+			array = content.split
+			
+			for index in 0...array.length
+				array[index] = array[index].to_i
+			end
+			
+			return array
 		end
-		
-		return array
 	rescue => e
 		puts "Error: #{e.message}"
 		exit
