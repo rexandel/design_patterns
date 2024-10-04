@@ -7,14 +7,8 @@ class Student
 		self.surname = surname
 		self.name = name
 		self.patronymic = patronymic
-		self.phone_number = params[:phone_number]
-		self.telegram = params[:telegram]
-		self.email = params[:email]
 		self.git = params[:git]
-	end
-	
-	def self.valid_name?(name)
-		name.match(/^[A-Za-z]+(?:-[A-Za-z]+)?$/) || name.match(/^[А-ЯЁа-яё]+(?:-[А-ЯЁа-яё]+)?$/)
+		self.set_contacts(params)
 	end
 	
 	def surname=(new_value)
@@ -40,47 +34,7 @@ class Student
 			raise ArgumentError, "Wrong patronymic format."
 		end
 	end
-	
-	def self.valid_phone_number?(phone_number)
-		phone_number.nil? || phone_number.match(/^\+7\(\d{3}\)-\d{3}-\d{2}-\d{2}$/)
-	end
 
-	def phone_number=(new_value)
-		if self.class.valid_phone_number?(new_value)
-			@phone_number = new_value
-		else
-			raise ArgumentError, "Wrong phone number format."
-		end
-	end
-	
-	def self.valid_telegram?(telegram)
-		telegram.nil? || telegram.match(/@[a-zA-Z0-9_]{5,}$/)
-	end
-	
-	def telegram=(new_value)
-		if self.class.valid_telegram?(new_value)
-			@telegram = new_value
-		else
-			raise ArgumentError, "Wrong telegram format."
-		end
-	end
-	
-	def self.valid_email?(email)
-		email.nil? || email.match(/^[\w+_.-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/)
-	end
-	
-	def email=(new_value)
-		if self.class.valid_email?(new_value)
-			@email = new_value
-		else
-			raise ArgumentError, "Wrong email format."
-		end
-	end
-	
-	def self.valid_git?(git)
-		git.nil? || git.match(/^https?:\/\/(www\.)?github\.com\/[a-zA-Z0-9_-]+\/?$/)
-	end
-	
 	def git=(new_value)
 		if self.class.valid_git?(new_value)
 			@git = new_value
@@ -88,7 +42,7 @@ class Student
 			raise ArgumentError, "Wrong git format."
 		end
 	end
-	
+
 	def validate_git?
 		!@git.nil?
 	end
@@ -114,5 +68,47 @@ class Student
 		puts "Git: #{@git ? @git : "Not specified"}"
 		
 		puts "----------------------------------------"
+	end
+
+	private
+
+	def self.valid_name?(name)
+		name.match(/^[A-Za-z]+(?:-[A-Za-z]+)?$/) || name.match(/^[А-ЯЁа-яё]+(?:-[А-ЯЁа-яё]+)?$/)
+	end
+
+	def self.valid_phone_number?(phone_number)
+		phone_number.nil? || phone_number.match(/^\+7\(\d{3}\)-\d{3}-\d{2}-\d{2}$/)
+	end
+	
+	def self.valid_telegram?(telegram)
+		telegram.nil? || telegram.match(/@[a-zA-Z0-9_]{5,}$/)
+	end
+	
+	def self.valid_email?(email)
+		email.nil? || email.match(/^[\w+_.-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/)
+	end
+	
+	def self.valid_git?(git)
+		git.nil? || git.match(/^https?:\/\/(www\.)?github\.com\/[a-zA-Z0-9_-]+\/?$/)
+	end
+	
+	def set_contacts(params)
+		if self.class.valid_phone_number?(params[:phone_number])
+			@phone_number = params[:phone_number]
+		else
+			raise ArgumentError, "Wrong phone number format."
+		end
+
+		if self.class.valid_telegram?(params[:telegram])
+			@telegram = params[:telegram]
+		else
+			raise ArgumentError, "Wrong telegram format."
+		end
+
+		if self.class.valid_email?(params[:email])
+			@email = params[:email]
+		else
+			raise ArgumentError, "Wrong email format."
+		end
 	end
 end
