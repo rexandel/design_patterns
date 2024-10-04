@@ -89,6 +89,18 @@ class Student
 		end
 	end
 	
+	def validate_git?
+		!@git.nil?
+	end
+
+	def validate_contacts?
+		!@phone_number.nil? || !@telegram.nil? || !@email.nil?
+	end
+
+	def validate?
+		validate_git? && validate_contacts?
+	end
+
 	def print_info
 		puts "----------------------------------------"
 		
@@ -104,4 +116,3 @@ class Student
 		puts "----------------------------------------"
 	end
 end
-	
