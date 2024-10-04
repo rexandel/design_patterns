@@ -15,7 +15,7 @@ second_student = Student.new(
 				name: "Ivan",
 				patronymic: "Ivanovich",
 				phone_number: "+7(977)-755-42-12",
-				telegram: "@ivan",
+				telegram: "@ivan_develop",
 				email: "ivan_dev@gmail.com",
 				git: "https://github.com/ivan")
 
