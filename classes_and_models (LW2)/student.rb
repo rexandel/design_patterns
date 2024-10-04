@@ -1,15 +1,28 @@
 class Student
-	attr_accessor :id, :surname, :name, :patronymic, :phone_number, :telegram, :email, :git
+	attr_reader :phone_number
+	attr_accessor :id, :surname, :name, :patronymic, :telegram, :email, :git
 
 	def initialize(surname:, name:, patronymic:, **params)
-		@id = params[:id]
-		@surname = surname
-		@name = name
-		@patronymic = patronymic
-		@phone_number = params[:phone_number]
-		@telegram = params[:telegram]
-		@email = params[:email]
-		@git = params[:git]
+		self.id = params[:id]
+		self.surname = surname
+		self.name = name
+		self.patronymic = patronymic
+		self.phone_number = params[:phone_number]
+		self.telegram = params[:telegram]
+		self.email = params[:email]
+		self.git = params[:git]
+	end
+	
+	def self.valid_phone_number?(phone_number)
+		phone_number.nil? || phone_number.match(/^\+7\(\d{3}\)-\d{3}-\d{2}-\d{2}$/)
+	end
+	
+	def phone_number=(new_value)
+		if self.class.valid_phone_number?(new_value)
+			@phone_number = new_value
+		else
+			raise ArgumentError, "Wrong phone number format."
+		end
 	end
 	
 	def print_info
