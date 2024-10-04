@@ -1,15 +1,15 @@
 class Student
 	attr_accessor :id, :surname, :name, :patronymic, :phone_number, :telegram, :email, :git
 
-	def initialize(surname:, name:, patronymic:, id: nil, phone_number: nil, telegram: nil, email: nil, git: nil)
-		@id = id
+	def initialize(surname:, name:, patronymic:, **params)
+		@id = params[:id]
 		@surname = surname
 		@name = name
 		@patronymic = patronymic
-		@phone_number = phone_number
-		@telegram = telegram
-		@email = email
-		@git = git
+		@phone_number = params[:phone_number]
+		@telegram = params[:telegram]
+		@email = params[:email]
+		@git = params[:git]
 	end
 	
 	def print_info
