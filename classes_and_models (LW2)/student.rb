@@ -73,5 +73,20 @@ class Student
 	def git=(new_value)
 		@git = new_value
 	end
+	
+	def print_info
+		puts "----------------------------------------"
+		
+		puts "ID: #{@id ? @id : "Not specified"}"
+		puts "Surname: #{@surname ? @surname : "Not specified"}"
+		puts "Name: #{@name ? @name : "Not specified"}"
+		puts "Patronymic: #{@patronymic ? @patronymic : "Not specified"}"
+		puts "Phone number: #{@phone_number ? @phone_number : "Not specified"}"
+		puts "Telegram: #{@telegram ? @telegram : "Not specified"}"
+		puts "Email: #{@email ? @email : "Not specified"}"
+		puts "Git: #{@git ? @git : "Not specified"}"
+		
+		puts "----------------------------------------"
+	end
 end
 	
