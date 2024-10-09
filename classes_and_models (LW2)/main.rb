@@ -33,16 +33,11 @@ begin
 					name: "Sergey",
 					patronymic: "Dmitrievich")
 
-	first_student.print_info
-	second_student.print_info
-	third_student.print_info
-	fourth_student.print_info
-
-	puts "First student validation: #{first_student.validate? ? 'Yes' : 'No'}"
-	puts "Second student validation: #{second_student.validate? ? 'Yes' : 'No'}"
-	puts "Third student validation: #{third_student.validate? ? 'Yes' : 'No'}"
-	puts "Fourth student validation: #{fourth_student.validate? ? 'Yes' : 'No'}"
+	puts first_student
+	puts second_student
+	puts third_student
+	puts fourth_student
 
 rescue ArgumentError => e
-  puts "Error: #{e.message}"
+	puts "Error: #{e.message}"
 end
