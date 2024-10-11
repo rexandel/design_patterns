@@ -75,6 +75,30 @@ class Student
 		validate_git? && validate_contacts?
 	end
 
+	def get_surname_with_initials
+		"#{surname} #{name[0].upcase}. #{patronymic[0].upcase}."
+	end
+
+	def get_git
+		git ? git : "not specified"
+	end
+
+	def get_any_contact
+		if phone_number
+			return "#{phone_number} (phone number)"
+		elsif telegram
+			return "#{telegram} (telegram)"
+		elsif email
+			return "#{email} (email)"
+		else
+			return"not specified"
+		end
+	end
+
+	def get_info
+		"Surname and initials: #{get_surname_with_initials} | Git: #{get_git} | Contact: #{get_any_contact}"
+	end
+
 	def to_s
 		"----------------------------------------\n" \
 		"ID: #{@id ? @id : 'Not specified'}\n" \
