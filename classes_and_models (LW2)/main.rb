@@ -1,3 +1,4 @@
+require_relative 'person.rb'
 require_relative 'student.rb'
 require_relative 'student_short.rb'
 
@@ -44,13 +45,13 @@ begin
 	puts third_student.get_info
 	puts fourth_student.get_info
 
-	first_student_short = StudentShort.new_from_student_object(first_student)
+	first_student_short = StudentShort.new(first_student)
 
 	puts first_student_short
 
-	fifth_student = StudentShort.new_from_string(id: 5, string: "Surname and initials: Sidorenko A. A. | Git: https://github.com/rexandel | Contact: +7(989)-655-77-11 [phone number]")
-	sixth_student = StudentShort.new_from_string(id: 6, string: "Surname and initials: Nevchenko A. S. | Git: https://github.com/neva | Contact: @nev_chen [telegram]")
-	seventh_student = StudentShort.new_from_string(id: 7, string: "Surname and initials: Kolosov S. S. | Git: Not specified | Contact: Not specified")
+	fifth_student = StudentShort.new("Surname and initials: Sidorenko A. A. | Git: https://github.com/rexandel | Contact: +7(989)-655-77-11", id: 5)
+	sixth_student = StudentShort.new("Surname and initials: Nevchenko A. S. | Git: https://github.com/neva | Contact: +7(989)-655-77-11", id: 6)
+	seventh_student = StudentShort.new("Surname and initials: Kolosov S. S. | Git: Not specified | Contact: Not specified", id: 7)
 
 	puts fifth_student
 	puts sixth_student
