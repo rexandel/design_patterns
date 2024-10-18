@@ -38,6 +38,11 @@ begin
 	puts third_student
 	puts fourth_student
 
+	puts first_student.get_info
+	puts second_student.get_info
+	puts third_student.get_info
+	puts fourth_student.get_info
+
 rescue ArgumentError => e
 	puts "Error: #{e.message}"
 end
