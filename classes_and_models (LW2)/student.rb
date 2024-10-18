@@ -76,25 +76,27 @@ class Student
 	end
 
 	def get_surname_with_initials
-		"#{@surname} #{@name[0].upcase}. #{@patronymic[0].upcase}."
+		"#{surname} #{name[0].upcase}. #{patronymic[0].upcase}."
+	end
+
+	def get_git
+		git
 	end
 
 	def get_any_contact
-		if @phone_number
-			return "Phone number", @phone_number.to_s
-		elsif @telegram
-			return "Telegram", @telegram.to_s
-		elsif @email
-			return "Email", @email.to_s
+		if phone_number
+			return "#{phone_number} [phone number]"
+		elsif telegram
+			return "#{telegram} [telegram]"
+		elsif email
+			return "#{email} [email]"
 		else
-			return "Contact", nil
+			return nil
 		end
 	end
 
 	def get_info
-		"Surname and initials: #{get_surname_with_initials} | " \
-		"Git: #{git ? git : 'Not specified'} | " \
-		"#{get_any_contact[0]}: #{get_any_contact[1] ? get_any_contact[1] : 'Not specified'}"
+		"Surname and initials: #{get_surname_with_initials} | Git: #{get_git ? get_git : 'Not specified'} | Contact: #{get_any_contact ? get_any_contact : 'Not specified'}"
 	end
 
 	def to_s
