@@ -3,7 +3,7 @@ require_relative 'person.rb'
 class Student < Person
 	attr_reader :surname, :name, :patronymic, :phone_number, :telegram, :email
 
-    def initialize(surname:, name:, patronymic:, id: nil, phone_number: nil, telegram: nil, email: nil, git: nil)
+	def initialize(surname:, name:, patronymic:, id: nil, phone_number: nil, telegram: nil, email: nil, git: nil)
 		self.id = id
 		self.surname = surname
 		self.name = name
@@ -12,26 +12,26 @@ class Student < Person
 		self.set_contacts(phone_number: phone_number, telegram: telegram, email: email)
 	end
 
-    def get_surname_with_initials
+	def get_surname_with_initials
 		"#{@surname} #{@name[0].upcase}. #{@patronymic[0].upcase}."
 	end
 
-    def get_any_contact
+	def get_any_contact
 		if @phone_number
-			return "Phone number", @phone_number.to_s
+			return @phone_number
 		elsif @telegram
-			return "Telegram", @telegram.to_s
+			return @telegram
 		elsif @email
-			return "Email", @email.to_s
+			return @email
 		else
-			return "Contact", nil
+			return nil
 		end
 	end
 
-    def get_info
+	def get_info
 		"Surname and initials: #{get_surname_with_initials} | " \
 		"Git: #{git ? git : 'Not specified'} | " \
-		"#{get_any_contact[0]}: #{get_any_contact[1] ? get_any_contact[1] : 'Not specified'}"
+		"#{determine_contact_type(get_any_contact)}: #{get_any_contact ? get_any_contact : 'Not specified'}"
 	end
 
 	def to_s
@@ -48,16 +48,16 @@ class Student < Person
 		"----------------------------------------"
 	end
 
-    private
+	private
 
-    def surname=(surname)
+	def surname=(surname)
 		if self.class.valid_name?(surname)
 			@surname = surname
 		else
 			raise ArgumentError, "Wrong surname format."
 		end
 	end
-	
+
 	def name=(name)
 		if self.class.valid_name?(name)
 			@name = name
@@ -65,7 +65,7 @@ class Student < Person
 			raise ArgumentError, "Wrong name format."
 		end
 	end
-	
+
 	def patronymic=(patronymic)
 		if self.class.valid_name?(patronymic)
 			@patronymic = patronymic
