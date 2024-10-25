@@ -36,7 +36,7 @@ class Person
 	def self.valid_git?(git)
 		git.nil? || git.match(/^https?:\/\/(www\.)?github\.com\/[a-zA-Z0-9_-]+\/?$/)
 	end
-
+	
 	protected
 
 	def id=(id)
@@ -59,7 +59,11 @@ class Person
 		raise NotImplementedError, "Method not implemented in the Person class"
 	end
 
-	def get_any_contact
+	def contact
+		raise NotImplementedError, "Method not implemented in the Person class"
+	end
+	
+	def surname_and_initials
 		raise NotImplementedError, "Method not implemented in the Person class"
 	end
 

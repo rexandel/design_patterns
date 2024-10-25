@@ -12,11 +12,11 @@ class Student < Person
 		self.set_contacts(phone_number: phone_number, telegram: telegram, email: email)
 	end
 
-	def get_surname_with_initials
+	def surname_and_initials
 		"#{@surname} #{@name[0].upcase}. #{@patronymic[0].upcase}."
 	end
 
-	def get_any_contact
+	def contact
 		if @phone_number
 			return @phone_number
 		elsif @telegram
@@ -29,9 +29,9 @@ class Student < Person
 	end
 
 	def get_info
-		"Surname and initials: #{get_surname_with_initials} | " \
+		"Surname and initials: #{surname_and_initials} | " \
 		"Git: #{git ? git : 'Not specified'} | " \
-		"#{determine_contact_type(get_any_contact)}: #{get_any_contact ? get_any_contact : 'Not specified'}"
+		"#{determine_contact_type(contact)}: #{contact ? contact : 'Not specified'}"
 	end
 
 	def to_s
