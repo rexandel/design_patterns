@@ -65,6 +65,18 @@ class Tests < Minitest::Test
 		assert_equal true, processor.none? { |x| x > 50 }
 	end
 
+	def test_reduce_product
+		assert_equal -83160, processor.reduce(1) { |prod, x| prod * x }
+	end
+
+	def test_reduce_sum
+		assert_equal 45, processor.reduce(0) { |sum, x| sum + x }
+	end
+
+	def test_reduce_min
+		assert_equal -7, processor.reduce { |min, x| min < x ? min : x }
+	end
+
 	private
 
 	attr_writer :processor
