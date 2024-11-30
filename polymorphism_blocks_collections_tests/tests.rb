@@ -33,6 +33,18 @@ class Tests < Minitest::Test
 		assert_equal [], empty_processor.find_all { |x| x > 0 }
 	end
 
+	def test_find_index_first_even
+		assert_equal 3, processor.find_index { |x| x.even? }
+	end
+
+	def test_find_index_first_positive
+		assert_equal 0, processor.find_index { |x| x > 0 }
+	end
+
+	def test_find_index_none_match
+		assert_nil processor.find_index { |x| x > 50 }
+	end
+	
 	private
 
 	attr_writer :processor

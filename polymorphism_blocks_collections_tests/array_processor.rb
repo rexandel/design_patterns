@@ -18,6 +18,13 @@ class ArrayProcessor
 		result
 	end
 
+	def find_index
+		self.array.each_with_index do |element, index|
+			return index if yield(element)
+		end
+		nil
+	end
+
 	def to_a
 		self.array.dup
 	end
