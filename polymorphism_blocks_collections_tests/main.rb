@@ -78,12 +78,20 @@ def find_max_element_in_interval
 	end
 end
 
+def find_elements_less_than_left_neighbor
+	array = create_array
+	array_of_indices = Processing.find_elements_less_than_left_neighbor(array)
+	puts "Indexes of elements: #{array_of_indices.join(' ')}"
+	puts "The number of such elements: #{array_of_indices.size}"
+end
+
 def main
 	loop do
 		puts 'Select an action:'
 		puts '1. Find the number of elements located after the maximum'
 		puts '2. Place the elements located to the minimum at the end of the array'
 		puts '3. Find the maximum of the elements in the interval'
+		puts '4. Find the indexes of the elements that are smaller than their left neighbor, and the number of such numbers'
 		puts '0. Exit'
 
 		print "Input your choice: "
@@ -103,6 +111,11 @@ def main
 		when 3
 			puts "\n"
 			find_max_element_in_interval
+			puts "\n"
+			puts "\n"
+		when 4
+			puts "\n"
+			find_elements_less_than_left_neighbor
 			puts "\n"
 			puts "\n"
 		when 0

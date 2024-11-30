@@ -16,4 +16,9 @@ class Processing
 		max_el = elements_in_range.max { |a, b| a <=> b }
 		return max_el
 	end
+
+	def self.find_elements_less_than_left_neighbor(array)
+		array_of_indexes = (1...array.size).select { |i| array[i] < array[i - 1] }
+		return array_of_indexes
+	end
 end
