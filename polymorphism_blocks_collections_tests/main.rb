@@ -59,10 +59,16 @@ def find_count_of_elements_after_max_element
 	puts "Result of the execution: #{Processing.find_count_of_elements_after_max_element(array)}"
 end
 
+def replace_elements_before_min_element
+	array = create_array
+	puts "Result of the execution: #{Processing.replace_elements_before_min_element(array).join(' ')}"
+end
+
 def main
 	loop do
 		puts 'Select an action:'
 		puts '1. Find the number of elements located after the maximum'
+		puts '2. Place the elements located to the minimum at the end of the array'
 		puts '0. Exit'
 
 		print "Input your choice: "
@@ -72,6 +78,11 @@ def main
 		when 1
 			puts "\n"
 			find_count_of_elements_after_max_element
+			puts "\n"
+			puts "\n"
+		when 2
+			puts "\n"
+			replace_elements_before_min_element
 			puts "\n"
 			puts "\n"
 		when 0
