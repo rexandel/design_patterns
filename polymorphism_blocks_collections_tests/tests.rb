@@ -44,7 +44,15 @@ class Tests < Minitest::Test
 	def test_find_index_none_match
 		assert_nil processor.find_index { |x| x > 50 }
 	end
-	
+
+	def test_min_max_absolute
+		assert_equal [1, 33], processor.min_max { |a, b| a.abs <=> b.abs }
+	end
+
+	def test_min_max_natural_order
+		assert_equal [-7, 33], processor.min_max { |a, b| a <=> b }
+	end
+
 	private
 
 	attr_writer :processor
