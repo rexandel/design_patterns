@@ -20,6 +20,19 @@ class Tests < Minitest::Test
 		assert_equal false, processor.any? { |x| x > 50 }
 	end
 
+	def test_find_all_even
+		assert_equal [4, 6], processor.find_all { |x| x.even? }
+	end
+
+	def test_find_all_positive
+		assert_equal [1, 3, 4, 5, 33, 6], processor.find_all { |x| x > 0 }
+	end
+
+	def test_find_all_empty_array
+		empty_processor = ArrayProcessor.new([])
+		assert_equal [], empty_processor.find_all { |x| x > 0 }
+	end
+
 	private
 
 	attr_writer :processor
