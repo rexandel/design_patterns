@@ -36,6 +36,13 @@ class ArrayProcessor
 		[min_element, max_element]
 	end
 
+	def none?
+		self.array.each do |element|
+			return false if yield(element)
+		end
+		true
+	end
+
 	def to_a
 		self.array.dup
 	end
