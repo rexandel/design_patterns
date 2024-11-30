@@ -1,4 +1,5 @@
 require "./processing.rb"
+require "./my_math.rb"
 
 class EmptyArrayError < StandardError; end
 
@@ -85,6 +86,15 @@ def find_elements_less_than_left_neighbor
 	puts "The number of such elements: #{array_of_indices.size}"
 end
 
+def find_unique_prime_factors
+	array = create_array
+	if MyMath.all_positive?(array)
+		puts "Result of the execution: #{Processing.find_unique_prime_factors(array).join(' ')}"
+	else
+		puts "Not all elements of the array are positive"
+	end
+end
+
 def main
 	loop do
 		puts 'Select an action:'
@@ -92,6 +102,7 @@ def main
 		puts '2. Place the elements located to the minimum at the end of the array'
 		puts '3. Find the maximum of the elements in the interval'
 		puts '4. Find the indexes of the elements that are smaller than their left neighbor, and the number of such numbers'
+		puts '5. Print a list of all positive prime divisors of elements without repetitions'
 		puts '0. Exit'
 
 		print "Input your choice: "
@@ -116,6 +127,11 @@ def main
 		when 4
 			puts "\n"
 			find_elements_less_than_left_neighbor
+			puts "\n"
+			puts "\n"
+		when 5
+			puts "\n"
+			find_unique_prime_factors
 			puts "\n"
 			puts "\n"
 		when 0
