@@ -1,3 +1,6 @@
+require "./tag.rb"
+require "./tree.rb"
+
 class EmptyHTMLFileError < StandardError; end
 
 def read_html_file(file_path)
@@ -17,6 +20,7 @@ end
 
 begin
 	html_content = read_html_file("example.html")
+	tree = Tree.new(html_content)
 	puts "The content of the html file:"
 	puts html_content
 
