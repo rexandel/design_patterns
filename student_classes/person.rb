@@ -36,7 +36,11 @@ class Person
 	def self.valid_git?(git)
 		git.nil? || git.match(/^https?:\/\/(www\.)?github\.com\/[a-zA-Z0-9_-]+\/?$/)
 	end
-	
+
+	def self.valid_birthdate?(birthdate)
+		birthdate.nil? || birthdate.match(/^\d{2}\.\d{2}\.\d{4}$/)
+	end
+
 	protected
 
 	def id=(id)

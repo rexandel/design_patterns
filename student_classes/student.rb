@@ -1,14 +1,17 @@
 require_relative 'person.rb'
+require 'date'
 
 class Student < Person
-	attr_reader :surname, :name, :patronymic, :phone_number, :telegram, :email
+	include Comparable
+	attr_reader :surname, :name, :patronymic, :phone_number, :telegram, :email, :birthdate
 
-	def initialize(surname:, name:, patronymic:, id: nil, phone_number: nil, telegram: nil, email: nil, git: nil)
+	def initialize(surname:, name:, patronymic:, id: nil, phone_number: nil, telegram: nil, email: nil, git: nil, birthdate: nil)
 		self.id = id
 		self.surname = surname
 		self.name = name
 		self.patronymic = patronymic
 		self.git = git
+		self.birthdate = birthdate
 		self.set_contacts(phone_number: phone_number, telegram: telegram, email: email)
 	end
 
@@ -44,8 +47,16 @@ class Student < Person
 		"Telegram: #{@telegram ? @telegram : 'Not specified'}\n" \
 		"Email: #{@email ? @email : 'Not specified'}\n" \
 		"Git: #{@git ? @git : 'Not specified'}\n" \
+		"Date of birth: #{@birthdate ? @birthdate : 'Not specified'}\n" \
 		"Validation: #{self.validate? ? 'Passed' : 'Failed'}\n" \
 		"----------------------------------------"
+	end
+
+	def <=>(other)
+		return nil unless other.is_a?(Student)
+		return 1 if (birthdate.nil? && other.birthdate.nil?) || (birthdate.nil?)
+		return -1 if other.birthdate.nil?
+		self.birthdate <=> other.birthdate
 	end
 
 	private
@@ -71,6 +82,18 @@ class Student < Person
 			@patronymic = patronymic
 		else
 			raise ArgumentError, "Wrong patronymic format."
+		end
+	end
+
+	def birthdate=(birthdate)
+		if self.class.valid_birthdate?(birthdate)
+			if not birthdate.nil?
+				@birthdate = Date.strptime(birthdate, "%d.%m.%Y")
+			else
+				@birthdate = nil
+			end
+		else
+			raise ArgumentError, "Wrong birthdate format."
 		end
 	end
 
