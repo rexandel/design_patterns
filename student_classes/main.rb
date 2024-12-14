@@ -1,6 +1,7 @@
 require_relative 'person.rb'
 require_relative 'student.rb'
 require_relative 'student_short.rb'
+require_relative 'binary_tree.rb'
 
 begin
 	first_student = Student.new(
@@ -10,7 +11,8 @@ begin
 		patronymic: "Andreevich",
 		phone_number: "+7(989)-655-77-11",
 		telegram: "@rexandel",
-		git: "https://github.com/rexandel"
+		git: "https://github.com/rexandel",
+		birthdate: "06.11.1995"
 	)
 
 	second_student = Student.new(
@@ -20,7 +22,8 @@ begin
 		patronymic: "Ivanovich",
 		phone_number: "+7(977)-755-42-12",
 		telegram: "@ivan_develop",
-		email: "ivan_dev@gmail.com"
+		email: "ivan_dev@gmail.com",
+		birthdate: "08.12.1999"
 	)
 
 	third_student = Student.new(
@@ -29,7 +32,7 @@ begin
 		name: "Alexey",
 		patronymic: "Romanovich",
 		email: "alexey_2003@gmail.com",
-		git: "https://github.com/all_exay"
+		birthdate: "16.11.2005"
 	)
 
 	fourth_student = Student.new(
@@ -60,6 +63,19 @@ begin
 	puts fifth_student_short
 	puts sixth_student_short
 	puts seventh_student_short
+
+	age_tree = BinaryTree.new
+
+	age_tree.append(first_student)
+	age_tree.append(second_student)
+	age_tree.append(third_student)
+	age_tree.append(fourth_student)
+
+	puts "\n\n"
+
+	puts "Sorted Students by Age:"
+	iterator = age_tree.iterator
+	iterator.each { |data| puts data }
 
 rescue ArgumentError => e
 	puts "Error: #{e.message}"
