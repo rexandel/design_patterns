@@ -1,10 +1,20 @@
 require './tag.rb'
+require './tree_iterator_dfs.rb'
+require './tree_iterator_bfs.rb'
 
 class Tree
 	attr_accessor :root
 
 	def initialize(html_string)
 		self.root = self.parse_html(html_string)
+	end
+
+	def dfs_iterator
+		TreeIteratorDFS.new(self.root)
+	end
+
+	def bfs_iterator
+		TreeIteratorBFS.new(self.root)
 	end
 
 	private
