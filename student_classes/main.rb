@@ -64,6 +64,7 @@ begin
 	puts sixth_student_short
 	puts seventh_student_short
 
+
 	age_tree = BinaryTree.new
 
 	age_tree.append(first_student)
@@ -76,6 +77,27 @@ begin
 	puts "Sorted Students by Age:"
 	iterator = age_tree.iterator
 	iterator.each { |data| puts data }
+
+
+	digit_tree = BinaryTree.new
+
+	digit_tree.append(2)
+	digit_tree.append(4)
+	digit_tree.append(1)
+	digit_tree.append(23)
+	digit_tree.append(10)
+
+	puts "\n\n"
+
+	puts "Sorted Digits:"
+	iterator = digit_tree.iterator
+	iterator.each { |data| puts data }
+
+	puts "\n\n"
+
+	puts "Digits > 3:"
+	iterator = digit_tree.iterator
+	iterator.select { |elem| elem > 3}.each { |data| puts data }
 
 rescue ArgumentError => e
 	puts "Error: #{e.message}"
