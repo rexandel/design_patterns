@@ -1,6 +1,7 @@
 class DataTable
-	def initialize(data)
-		self.data = data
+	def initialize(header, data)
+		self.header = header
+		self.data = [header] + data
 	end
 	
 	def row_count
@@ -46,9 +47,18 @@ class DataTable
 		return output
 	end
 	
+	def update_data(data)
+		if data.is_a?(Array) && data.all? { |row| row.is_a?(Array) }
+			@data[1..-1] = data.map { |element| element.dup }
+		else
+			raise ArgumentError, "Data must be a two-dimensional array"
+		end
+	end
+	
 	private
 	
 	attr_reader :data
+	attr_accessor :header
 	
 	def data=(data)
 		if data.is_a?(Array) && data.all? { |row| row.is_a?(Array) }

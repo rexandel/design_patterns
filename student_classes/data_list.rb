@@ -25,7 +25,7 @@ class DataList
 	def get_data
 		header = get_names
 		rows = get_info
-		return DataTable.new([header] + rows)
+		return DataTable.new(header, rows)
 	end
 	
 	protected
