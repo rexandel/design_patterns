@@ -100,6 +100,7 @@ begin
 	iterator = digit_tree.iterator
 	iterator.select { |elem| elem > 3}.each { |data| puts data }
 	
+	
 	data_table = [
 	  [1, 'Alexander', 'rexandel'],
 	  [2, 'Ivan', 'ivan_develop'],
