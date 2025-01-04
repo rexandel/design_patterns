@@ -4,6 +4,7 @@ require_relative 'student_short.rb'
 require_relative 'binary_tree.rb'
 require_relative 'data_table.rb'
 require_relative 'data_list.rb'
+require_relative 'data_list_student_short.rb'
 
 begin
 	first_student = Student.new(
@@ -119,19 +120,21 @@ begin
 	puts "Element at (1, 1): #{data_table_obj.get_element(1, 1)}"
 	
 	
-	data_list = ['Alexander', 'Ivan', 'Alexey']
+	data_list_student_short = [fifth_student_short, sixth_student_short]
 	
-	data_list_obj = DataList.new(data_list)
+	data_list_student_short_obj = DataListStudentShort.new(data_list_student_short)
 	
 	puts "\n\n"
 	
-	data_list_obj.select(1)
+	data_list_student_short_obj.select(0)
 	
-	puts "Selected elements after choosing index 1: #{data_list_obj.get_selected}"
+	puts "Selected elements after choosing index 1: #{data_list_student_short_obj.get_selected}"
 	
-	data_list_obj.select(0)
+	data_list_student_short_obj.select(1)
 	
-	puts "Selected elements after choosing index 0: #{data_list_obj.get_selected}"
+	puts "Selected elements after choosing index 0: #{data_list_student_short_obj.get_selected}"
+	
+	puts data_list_student_short_obj.get_data
 
 rescue ArgumentError => e
 	puts "Error: #{e.message}"

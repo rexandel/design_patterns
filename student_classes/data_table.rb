@@ -26,6 +26,26 @@ class DataTable
 		return self.data[row_index][column_index]
 	end
 	
+	def to_s
+		if data.empty?
+			return "Table is empty"
+		else
+			output = "---------------------------------------------------------------------------------------------------------\n"
+			data.each do |row|
+				formatted_row = row.map.with_index do |cell, index|
+					if index == 0
+						format('%-3s', cell)
+					else
+						format('%-35s', cell)
+					end
+				end
+			output += " #{formatted_row.join(' | ')}\n"
+			end
+			output += "---------------------------------------------------------------------------------------------------------"
+		end
+		return output
+	end
+	
 	private
 	
 	attr_reader :data
