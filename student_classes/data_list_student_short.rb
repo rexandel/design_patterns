@@ -6,16 +6,9 @@ class DataListStudentShort < DataList
 		return ["№", "surname_and_initials", "git", "contact"]
 	end
 	
-	def get_data
-		index = 1
-		table_data = [self.get_names]
-		selected = get_selected
-		selected.each do |selected_index|
-			selected_obj = self.data[selected_index]
-			row = [index, selected_obj.surname_and_initials, selected_obj.git, selected_obj.contact]
-			table_data.append(row)
-			index += 1
-		end
-		return DataTable.new(table_data)
+	private
+	
+	def build_row(current_index, student_short_object)
+		return [current_index, student_short_object.surname_and_initials, student_short_object.git, student_short_object.contact]
 	end
 end

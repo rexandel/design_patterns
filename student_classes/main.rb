@@ -101,40 +101,6 @@ begin
 	puts "Digits > 3:"
 	iterator = digit_tree.iterator
 	iterator.select { |elem| elem > 3}.each { |data| puts data }
-	
-	
-	data_table = [
-	  [1, 'Alexander', 'rexandel'],
-	  [2, 'Ivan', 'ivan_develop'],
-	  [3, 'Alexey', 'alex']
-	]
-	
-	data_table_obj = DataTable.new(data_table)
-	
-	puts "\n\n"
-	
-	puts "Row count: #{data_table_obj.row_count}"
-	
-	puts "Column count: #{data_table_obj.column_count}"
-	
-	puts "Element at (1, 1): #{data_table_obj.get_element(1, 1)}"
-	
-	
-	data_list_student_short = [fifth_student_short, sixth_student_short]
-	
-	data_list_student_short_obj = DataListStudentShort.new(data_list_student_short)
-	
-	puts "\n\n"
-	
-	data_list_student_short_obj.select(0)
-	
-	puts "Selected elements after choosing index 1: #{data_list_student_short_obj.get_selected}"
-	
-	data_list_student_short_obj.select(1)
-	
-	puts "Selected elements after choosing index 0: #{data_list_student_short_obj.get_selected}"
-	
-	puts data_list_student_short_obj.get_data
 
 rescue ArgumentError => e
 	puts "Error: #{e.message}"

@@ -22,14 +22,33 @@ class DataList
 		return @selected
 	end
 	
+	def get_data
+		header = get_names
+		rows = get_info
+		return DataTable.new([header] + rows)
+	end
+	
 	protected
 	
 	def get_names
 		raise NotImplementedError, "Method not implemented in the DataList class"
 	end
 	
-	def get_data
+	def build_row
 		raise NotImplementedError, "Method not implemented in the DataList class"
+	end
+	
+	def get_info
+		current_index = 1
+		result_rows = []
+		selected_indexes = get_selected
+		selected_indexes.each do |index|
+			current_object = self.data[index]
+			row = build_row(current_index, current_object)
+			result_rows.append(row)
+			current_index += 1
+		end
+		return result_rows
 	end
 	
 	private
