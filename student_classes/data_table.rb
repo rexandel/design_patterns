@@ -23,7 +23,6 @@ class DataTable
 		if column_index < 0 || column_index >= column_count
 			raise IndexError, "Column index out of bounds"
 		end
-		
 		return self.data[row_index][column_index]
 	end
 	

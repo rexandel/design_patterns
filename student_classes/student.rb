@@ -3,8 +3,9 @@ require 'date'
 
 class Student < Person
 	include Comparable
+	
 	attr_reader :surname, :name, :patronymic, :phone_number, :telegram, :email, :birthdate
-
+	
 	def initialize(surname:, name:, patronymic:, id: nil, phone_number: nil, telegram: nil, email: nil, git: nil, birthdate: nil)
 		self.id = id
 		self.surname = surname
@@ -14,11 +15,11 @@ class Student < Person
 		self.birthdate = birthdate
 		self.set_contacts(phone_number: phone_number, telegram: telegram, email: email)
 	end
-
+	
 	def surname_and_initials
-		"#{@surname} #{@name[0].upcase}. #{@patronymic[0].upcase}."
+		return "#{@surname} #{@name[0].upcase}. #{@patronymic[0].upcase}."
 	end
-
+	
 	def contact
 		if @phone_number
 			return @phone_number
@@ -30,13 +31,13 @@ class Student < Person
 			return nil
 		end
 	end
-
+	
 	def get_info
 		"Surname and initials: #{surname_and_initials} | " \
 		"Git: #{git ? git : 'Not specified'} | " \
 		"#{determine_contact_type(contact)}: #{contact ? contact : 'Not specified'}"
 	end
-
+	
 	def to_s
 		"----------------------------------------\n" \
 		"ID: #{@id ? @id : 'Not specified'}\n" \
@@ -51,16 +52,16 @@ class Student < Person
 		"Validation: #{self.validate? ? 'Passed' : 'Failed'}\n" \
 		"----------------------------------------"
 	end
-
+	
 	def <=>(other)
 		return nil unless other.is_a?(Student)
 		return 1 if (birthdate.nil? && other.birthdate.nil?) || (birthdate.nil?)
 		return -1 if other.birthdate.nil?
-		self.birthdate <=> other.birthdate
+		return self.birthdate <=> other.birthdate
 	end
-
+	
 	private
-
+	
 	def surname=(surname)
 		if self.class.valid_name?(surname)
 			@surname = surname
@@ -68,7 +69,7 @@ class Student < Person
 			raise ArgumentError, "Wrong surname format."
 		end
 	end
-
+	
 	def name=(name)
 		if self.class.valid_name?(name)
 			@name = name
@@ -76,7 +77,7 @@ class Student < Person
 			raise ArgumentError, "Wrong name format."
 		end
 	end
-
+	
 	def patronymic=(patronymic)
 		if self.class.valid_name?(patronymic)
 			@patronymic = patronymic
@@ -84,7 +85,7 @@ class Student < Person
 			raise ArgumentError, "Wrong patronymic format."
 		end
 	end
-
+	
 	def birthdate=(birthdate)
 		if self.class.valid_birthdate?(birthdate)
 			if not birthdate.nil?
@@ -96,20 +97,20 @@ class Student < Person
 			raise ArgumentError, "Wrong birthdate format."
 		end
 	end
-
+	
 	def set_contacts(phone_number: nil, telegram: nil, email: nil)
 		if self.class.valid_phone_number?(phone_number)
 			@phone_number = phone_number
 		else
 			raise ArgumentError, "Wrong phone number format."
 		end
-
+		
 		if self.class.valid_telegram?(telegram)
 			@telegram = telegram
 		else
 			raise ArgumentError, "Wrong telegram format."
 		end
-
+		
 		if self.class.valid_email?(email)
 			@email = email
 		else
