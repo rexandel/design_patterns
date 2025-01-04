@@ -101,6 +101,18 @@ begin
 	puts "Digits > 3:"
 	iterator = digit_tree.iterator
 	iterator.select { |elem| elem > 3}.each { |data| puts data }
+	
+	
+	data_list_student_short = [fifth_student_short, sixth_student_short]
+	
+	data_list_student_short_obj = DataListStudentShort.new(data_list_student_short)
+	
+	puts "\n\n"
+	
+	data_list_student_short_obj.select(0)
+	data_list_student_short_obj.select(1)
+	
+	puts data_list_student_short_obj.get_data
 
 rescue ArgumentError => e
 	puts "Error: #{e.message}"
