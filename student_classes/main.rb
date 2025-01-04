@@ -2,6 +2,7 @@ require_relative 'person.rb'
 require_relative 'student.rb'
 require_relative 'student_short.rb'
 require_relative 'binary_tree.rb'
+require_relative 'data_table.rb'
 
 begin
 	first_student = Student.new(
@@ -98,6 +99,22 @@ begin
 	puts "Digits > 3:"
 	iterator = digit_tree.iterator
 	iterator.select { |elem| elem > 3}.each { |data| puts data }
+	
+	data_table = [
+	  [1, 'Alexander', 'rexandel'],
+	  [2, 'Ivan', 'ivan_develop'],
+	  [3, 'Alexey', 'alex']
+	]
+	
+	data_table_obj = DataTable.new(data_table)
+	
+	puts "\n\n"
+	
+	puts "Row count: #{data_table_obj.row_count}"
+	
+	puts "Column count: #{data_table_obj.column_count}"
+	
+	puts "Element at (1, 1): #{data_table_obj.get_element(1, 1)}"
 
 rescue ArgumentError => e
 	puts "Error: #{e.message}"
