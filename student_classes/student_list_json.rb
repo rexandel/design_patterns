@@ -4,9 +4,7 @@ require_relative './student_short.rb'
 
 class StudentsListError < StandardError; end
 
-class StudentsListJSON
-	attr_accessor :file_path, :students
-	
+class StudentsListJSON	
 	def initialize(file_path)
         self.file_path = file_path
         self.students = []
@@ -96,8 +94,8 @@ class StudentsListJSON
 	end
 	
 	def sort_by_surname_and_initials!
-        self.students.sort_by! { |student| student.surname_and_initials }
-    end
+		self.students.sort_by! { |student| student.surname_and_initials }
+	end
 	
 	def add_student(student_to_add)
 		begin
@@ -116,4 +114,25 @@ class StudentsListJSON
 			raise StudentsListError, "Unexpected error while adding a student: #{e.message}"
 		end
 	end
+	
+	def replace_student_by_id(required_id, new_student)
+		index = self.students.find_index { |student| student.id == required_id }
+		if index.nil?
+			raise StandardError, "Student with ID #{required_student_id} not found."
+		end
+		new_student.id = required_id
+		self.students[index] = new_student
+	end
+	
+	def delete_student_by_id(required_id)
+		index = self.students.find_index { |student| student.id == required_id }
+		if index.nil?
+			raise StandardError, "Student with ID #{student_id} not found."
+		end
+		self.students.delete_at(index)
+	end
+	
+	private
+	
+	attr_accessor :file_path, :students
 end
