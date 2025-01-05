@@ -126,7 +126,7 @@ begin
 	
 	student_list_json = StudentsListJSON.new(file_name)
 	
-	student_list_json.read_from_file
+	array_of_students.each { |student| student_list_json.add_student(student) }
 	
 	puts "\n\n"
 	

@@ -25,7 +25,7 @@ class StudentsListJSON
 				parsed_data = JSON.parse(file_content, symbolize_names: true)
 				
 				if parsed_data.is_a?(Array) && parsed_data.all? { |record| record.is_a?(Hash) }
-					self.students = parsed_data.map { |record| Student.new(**record) }
+					parsed_data.map { |record| add_student(Student.new(**record)) }
 				else
 					raise StudentsListError, "Invalid JSON structure. Expected an array of hashes."
 				end
@@ -92,6 +92,28 @@ class StudentsListJSON
 			raise StudentsListError, "Invalid operation: #{e.message}"
 		rescue StandardError => e
 			raise StudentsListError, "Unexpected error while fetching the requested page: #{e.message}"
+		end
+	end
+	
+	def sort_by_surname_and_initials!
+        self.students.sort_by! { |student| student.surname_and_initials }
+    end
+	
+	def add_student(student_to_add)
+		begin
+			if self.students.any? { |existing_student| existing_student == student_to_add }
+				raise StudentsListError, "Cannot add student: A student with the same git or contact already exists."
+			end
+			
+			current_ids = self.students.map { |student| student.id }
+			new_student_id = current_ids.empty? ? 1 : current_ids.max + 1
+			
+			student_to_add.id = new_student_id
+			self.students << student_to_add
+		rescue StudentsListError => e
+			raise StudentsListError, "Failed to add student: #{e.message}"
+		rescue StandardError => e
+			raise StudentsListError, "Unexpected error while adding a student: #{e.message}"
 		end
 	end
 end
