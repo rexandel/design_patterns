@@ -123,27 +123,44 @@ begin
 	]
 	
 	file_name = 'students.json'
-	student_list_json_write = StudentsListJSON.new(file_name)
 	
-	array_of_students.each { |student| student_list_json_write.students << student }
+	student_list_json = StudentsListJSON.new(file_name)
 	
-	student_list_json_write.write_to_file
-	
-	student_list_json_read = StudentsListJSON.new(file_name)
-	
-	student_list_json_read.read_from_file
+	student_list_json.read_from_file
 	
 	puts "\n\n"
 	
-	puts "All Students:"
+	current_page = 1
+	page_size = 2
 	
-	puts student_list_json_read.students
-	
-	puts "\n\n"
-	
-	puts "Requested Student:"
-	
-	puts student_list_json_read.get_student_by_id(3)
+	loop do
+		system('cls')
+		puts "Current page: #{current_page}"
+		puts "Current page_size: #{page_size}"
+		
+		puts "Students:"
+		
+		data_list_student_short = student_list_json.get_k_n_student_short_list(current_page, page_size)
+		data_table_student_short = data_list_student_short.get_data
+		puts data_table_student_short
+		
+		print "Enter your choice: "
+		choice = gets.chomp.downcase
+
+		case choice
+		when 'n'
+			current_page += 1
+		when 'p'
+			if current_page != 0
+				current_page -= 1
+			end
+		when 'q'
+			puts "Exiting..."
+			break
+		else
+			puts "Invalid choice. Please try again."
+		end
+	end
 
 rescue StandardError => e
 	puts "Error: #{e.message}"

@@ -66,4 +66,32 @@ class StudentsListJSON
 	def get_student_by_id(request_id)
 		return self.students.find { |student| student.id == request_id }
 	end
+	
+	def get_k_n_student_short_list(page_number, page_size, previous_data_list  = nil)
+		begin
+			if page_number < 1 || page_size <= 0
+				raise StudentsListError, "Invalid arguments. 'page_number' must be greater than 0 and 'page_size' must be positive."
+			end
+			
+			start_index = (page_number - 1) * page_size
+			paginated_students = self.students[start_index, page_size]
+			
+			if paginated_students.nil?
+				paginated_students = []
+			end
+			
+			student_short_objects = paginated_students.map { |student| StudentShort.new_from_student_object(student) }
+			
+			if previous_data_list.nil?
+				return DataListStudentShort.new(student_short_objects)
+			else
+				previous_data_list.data = student_short_objects
+				return previous_data_list 
+			end
+		rescue StudentsListError => e
+			raise StudentsListError, "Invalid operation: #{e.message}"
+		rescue StandardError => e
+			raise StudentsListError, "Unexpected error while fetching the requested page: #{e.message}"
+		end
+	end
 end

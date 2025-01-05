@@ -54,10 +54,8 @@ class DataList
 	def get_info
 		current_index = 1
 		result_rows = []
-		selected_indexes = get_selected
-		selected_indexes.each do |index|
-			current_object = self.data[index]
-			row = build_row(current_index, current_object)
+		data.each do |current_object|
+			row = build_row(current_object)
 			result_rows.append(row)
 			current_index += 1
 		end
