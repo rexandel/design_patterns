@@ -53,6 +53,20 @@ class Student < Person
 		"----------------------------------------"
 	end
 	
+	def to_h
+		{
+			id: self.id,
+			surname: self.surname,
+			name: self.name,
+			patronymic: self.patronymic,
+			phone_number: self.phone_number,
+			telegram: self.telegram,
+			email: self.email,
+			git: self.git,
+			birthdate: self.birthdate&.strftime('%d.%m.%Y')
+		}
+	end
+	
 	def <=>(other)
 		return nil unless other.is_a?(Student)
 		return 1 if (birthdate.nil? && other.birthdate.nil?) || (birthdate.nil?)

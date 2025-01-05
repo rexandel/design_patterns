@@ -4,6 +4,7 @@ require_relative 'student_short.rb'
 require_relative 'binary_tree.rb'
 require_relative 'data_table.rb'
 require_relative 'data_list_student_short.rb'
+require_relative 'student_list_json.rb'
 
 begin
 	first_student = Student.new(
@@ -44,77 +45,95 @@ begin
 		patronymic: "Dmitrievich"
 	)
 	
+	fifth_student = Student.new(
+		id: 5,
+		surname: "Smirnov",
+		name: "Dmitry",
+		patronymic: "Vladimirovich",
+		phone_number: "+7(915)-123-45-67",
+		telegram: "@dmitry_smirnov",
+		email: "dmitry_smirnov@gmail.com",
+		git: "https://github.com/dsmirnov",
+		birthdate: "14.02.1998"
+	)
 	
-	first_student_short = StudentShort.new_from_student_object(first_student)
-	second_student_short = StudentShort.new_from_string(string: "Surname and initials: Sidorenko A. A. | Git: https://github.com/rexandel | Contact: +7(989)-655-77-11", id: 2)
-	third_student_short = StudentShort.new_from_string(string: "Surname and initials: Nevchenko A. S. | Git: https://github.com/neva | Contact: +7(777)-555-44-22", id: 3)
-	fourth_student_short = StudentShort.new_from_string(string: "Surname and initials: Kolosov S. S. | Git: Not specified | Contact: Not specified", id: 4)
-	fifth_student_short = StudentShort.new_from_string(string: "Surname and initials: Ivanov I. I. | Git: https://github.com/ivanovii | Contact: ivanov@example.com", id: 5)
-	sixth_student_short = StudentShort.new_from_string(string: "Surname and initials: Petrova P. P. | Git: https://github.com/ppetrova | Contact: @ppetrova", id: 6)
-	seventh_student_short = StudentShort.new_from_string(string: "Surname and initials: Sidorov S. S. | Git: https://github.com/sidorovss | Contact: +7(921)-123-45-67", id: 7)
-	eighth_student_short = StudentShort.new_from_string(string: "Surname and initials: Orlova O. O. | Git: https://github.com/orlovao | Contact: +7(800)-555-00-11", id: 8)
-	ninth_student_short = StudentShort.new_from_string(string: "Surname and initials: Kuznetsov K. K. | Git: https://github.com/kuznetsovkk | Contact: kuznetsov@example.com", id: 9)
-	tenth_student_short = StudentShort.new_from_string(string: "Surname and initials: Smirnova S. S. | Git: https://github.com/ssmirnova | Contact: @ssmirnova", id: 10)
+	sixth_student = Student.new(
+		id: 6,
+		surname: "Vasiliev",
+		name: "Nikolay",
+		patronymic: "Petrovich",
+		phone_number: "+7(901)-333-22-11",
+		email: "nikolay_vasiliev@gmail.com",
+		git: "https://github.com/nikolay_vasiliev",
+		birthdate: "21.03.1997"
+	)
 	
+	seventh_student = Student.new(
+		id: 7,
+		surname: "Sokolov",
+		name: "Andrey",
+		patronymic: "Igorevich",
+		telegram: "@andrey_sokolov",
+		git: "https://github.com/andreysokolov",
+		birthdate: "05.08.2000"
+	)
 	
-	age_tree = BinaryTree.new
+	eighth_student = Student.new(
+		id: 8,
+		surname: "Kuznetsov",
+		name: "Roman",
+		patronymic: "Sergeevich",
+		phone_number: "+7(903)-777-66-55",
+		telegram: "@roman_kuznetsov",
+		birthdate: "12.04.1996"
+	)
 	
-	age_tree.append(first_student)
-	age_tree.append(second_student)
-	age_tree.append(third_student)
-	age_tree.append(fourth_student)
+	ninth_student = Student.new(
+		id: 9,
+		surname: "Popov",
+		name: "Egor",
+		patronymic: "Vladimirovich",
+		email: "egor_popov@gmail.com",
+		git: "https://github.com/egorpopov",
+		birthdate: "30.06.1995"
+	)
 	
-	puts "\n\n"
+	tenth_student = Student.new(
+		id: 10,
+		surname: "Novikov",
+		name: "Mikhail",
+		patronymic: "Olegovich",
+		phone_number: "+7(905)-555-44-33",
+		email: "mikhail_novikov@gmail.com",
+		git: "https://github.com/mikhailnovikov",
+		birthdate: "17.09.1994"
+	)
 	
-	puts "Sorted Students by Age:"
-	iterator = age_tree.iterator
-	iterator.each { |data| puts data }
-	
-	
-	digit_tree = BinaryTree.new
-	
-	digit_tree.append(2)
-	digit_tree.append(4)
-	digit_tree.append(1)
-	digit_tree.append(23)
-	digit_tree.append(10)
-	
-	puts "\n\n"
-	
-	puts "Sorted Digits:"
-	iterator = digit_tree.iterator
-	iterator.each { |data| puts data }
-	
-	puts "\n\n"
-	
-	puts "Digits > 3:"
-	iterator = digit_tree.iterator
-	iterator.select { |elem| elem > 3}.each { |data| puts data }
-	
-	
-	data_list_student_short = [
-		first_student_short,
-		second_student_short,
-		third_student_short,
-		fourth_student_short,
-		fifth_student_short,
-		sixth_student_short,
-		seventh_student_short,
-		eighth_student_short,
-		ninth_student_short,
-		tenth_student_short
+	array_of_students = [
+		first_student,
+		second_student,
+		third_student,
+		fourth_student,
+		fifth_student,
+		sixth_student,
+		seventh_student,
+		eighth_student,
+		ninth_student,
+		tenth_student
 	]
 	
-	data_list_student_short_obj = DataListStudentShort.new(data_list_student_short)
+	file_name = 'students.json'
+	student_list_json_write = StudentsListJSON.new(file_name)
 	
-	puts "\n\n"
+	array_of_students.each { |student| student_list_json_write.students << student }
 	
-	selected_student_short_obj = [0, 4, 5, 6, 7]
-	selected_student_short_obj.each { |student_short_obj| data_list_student_short_obj.select(student_short_obj) }
+	student_list_json_write.write_to_file
 	
-	data_table = data_list_student_short_obj.get_data
+	student_list_json_read = StudentsListJSON.new(file_name)
 	
-	puts data_table
+	student_list_json_read.read_from_file
+	
+	puts student_list_json_read.students
 
 rescue StandardError => e
 	puts "Error: #{e.message}"
