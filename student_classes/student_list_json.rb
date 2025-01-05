@@ -62,4 +62,8 @@ class StudentsListJSON
 			raise StudentsListError, "Unexpected error during file writing: #{generic_error.message}"
 		end
 	end
+	
+	def get_student_by_id(request_id)
+		return self.students.find { |student| student.id == request_id }
+	end
 end

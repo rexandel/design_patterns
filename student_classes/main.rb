@@ -133,7 +133,17 @@ begin
 	
 	student_list_json_read.read_from_file
 	
+	puts "\n\n"
+	
+	puts "All Students:"
+	
 	puts student_list_json_read.students
+	
+	puts "\n\n"
+	
+	puts "Requested Student:"
+	
+	puts student_list_json_read.get_student_by_id(3)
 
 rescue StandardError => e
 	puts "Error: #{e.message}"
