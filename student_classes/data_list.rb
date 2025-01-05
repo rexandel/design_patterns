@@ -8,9 +8,11 @@ class DataList
 		if not number.is_a?(Integer)
 			raise ArgumentError, "Index must be an integer"
 		end
+		
 		if number < 0 || number >= data.size
 			raise IndexError, "Element with index #{number} does not exist"
 		end
+		
 		element = self.data[number]
 		if not get_selected.include?(number)
 			get_selected << number
@@ -52,12 +54,10 @@ class DataList
 	end
 	
 	def get_info
-		current_index = 1
 		result_rows = []
 		data.each do |current_object|
 			row = build_row(current_object)
 			result_rows.append(row)
-			current_index += 1
 		end
 		return result_rows
 	end

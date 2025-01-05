@@ -152,7 +152,7 @@ begin
 		when 'n'
 			current_page += 1
 		when 'p'
-			if current_page != 0
+			if current_page != 1
 				current_page -= 1
 			end
 		when 'q'

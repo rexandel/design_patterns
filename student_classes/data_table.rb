@@ -9,20 +9,19 @@ class DataTable
 	end
 	
 	def column_count
-		if data.empty?
-			return 0
-		else
-			return data[0].size
-		end
+		return 0 if data.empty?
+		return data[0].size
 	end
 	
 	def get_element(row_index, column_index)
 		if row_index < 0 || row_index >= row_count
 			raise IndexError, "Row index out of bounds"
 		end
+		
 		if column_index < 0 || column_index >= column_count
 			raise IndexError, "Column index out of bounds"
 		end
+		
 		return self.data[row_index][column_index]
 	end
 	
@@ -36,7 +35,7 @@ class DataTable
 					if index == 0
 						format('%-3s', cell)
 					else
-						format('%-35s', cell)
+						format('%-35s', cell || 'Not specified')
 					end
 				end
 			output += " #{formatted_row.join(' | ')}\n"
