@@ -4,7 +4,7 @@ require_relative './student_short.rb'
 
 class StudentsListError < StandardError; end
 
-class StudentsListJSON	
+class StudentsListJSON
 	def initialize(file_path)
         self.file_path = file_path
         self.students = []
@@ -130,6 +130,10 @@ class StudentsListJSON
 			raise StandardError, "Student with ID #{student_id} not found."
 		end
 		self.students.delete_at(index)
+	end
+	
+	def get_student_short_count
+		return self.students.size
 	end
 	
 	private

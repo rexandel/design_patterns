@@ -135,6 +135,7 @@ begin
 	
 	loop do
 		system('cls')
+		puts "Count Of Students: #{student_list_json.get_student_short_count}"
 		puts "Current page: #{current_page}"
 		puts "Current page_size: #{page_size}"
 		
