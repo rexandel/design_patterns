@@ -1,10 +1,10 @@
-require 'json'
+require 'yaml'
 require_relative './student.rb'
 require_relative './student_short.rb'
 
 class StudentsListError < StandardError; end
 
-class StudentsListJSON
+class StudentsListYAML
 	def initialize(file_path)
         self.file_path = file_path
         self.students = []
@@ -20,16 +20,16 @@ class StudentsListJSON
 				
 				return [] if file_content.strip.empty?
 				
-				parsed_data = JSON.parse(file_content, symbolize_names: true)
+				parsed_data = YAML.safe_load(file_content, permitted_classes: [Hash, Symbol])
 				
 				if parsed_data.is_a?(Array) && parsed_data.all? { |record| record.is_a?(Hash) }
 					parsed_data.map { |record| add_student(Student.new(**record)) }
 				else
-					raise StudentsListError, "Invalid JSON structure. Expected an array of hashes."
+					raise StudentsListError, "Invalid YAML structure. Expected an array of hashes."
 				end
 			end
-		rescue JSON::ParserError => parse_error
-			raise StudentsListError, "Error parsing JSON: #{parse_error.message}"
+		rescue Psych::SyntaxError => parse_error
+			raise StudentsListError, "Error parsing YAML: #{parse_error.message}"
 		rescue StudentsListError => custom_error
 			raise custom_error
 		rescue StandardError => generic_error
@@ -50,12 +50,10 @@ class StudentsListJSON
 			student_records = self.students.map { |student| student.to_h }
 			
 			File.open(self.file_path, 'w') do |file|
-				file.write(JSON.pretty_generate(student_records))
+				file.write(student_records.to_yaml)
 			end
 		rescue IOError => io_error
 			raise StudentsListError, "Failed to write to file: #{io_error.message}"
-		rescue JSON::GeneratorError => json_error
-			raise StudentsListError, "Error generating JSON: #{json_error.message}"
 		rescue StandardError => generic_error
 			raise StudentsListError, "Unexpected error during file writing: #{generic_error.message}"
 		end

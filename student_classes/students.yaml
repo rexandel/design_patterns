@@ -1,0 +1,91 @@
+---
+- :id: 1
+  :surname: Sidorenko
+  :name: Alexander
+  :patronymic: Andreevich
+  :phone_number: "+7(989)-655-77-11"
+  :telegram: "@rexandel"
+  :email:
+  :git: https://github.com/rexandel
+  :birthdate: 06.11.1995
+- :id: 2
+  :surname: Ivanov
+  :name: Ivan
+  :patronymic: Ivanovich
+  :phone_number: "+7(977)-755-42-12"
+  :telegram: "@ivan_develop"
+  :email: ivan_dev@gmail.com
+  :git:
+  :birthdate: '08.12.1999'
+- :id: 3
+  :surname: Petrov
+  :name: Alexey
+  :patronymic: Romanovich
+  :phone_number:
+  :telegram:
+  :email: alexey_2003@gmail.com
+  :git:
+  :birthdate: 16.11.2005
+- :id: 4
+  :surname: Ivanov
+  :name: Sergey
+  :patronymic: Dmitrievich
+  :phone_number:
+  :telegram:
+  :email:
+  :git:
+  :birthdate:
+- :id: 5
+  :surname: Smirnov
+  :name: Dmitry
+  :patronymic: Vladimirovich
+  :phone_number: "+7(915)-123-45-67"
+  :telegram: "@dmitry_smirnov"
+  :email: dmitry_smirnov@gmail.com
+  :git: https://github.com/dsmirnov
+  :birthdate: 14.02.1998
+- :id: 6
+  :surname: Vasiliev
+  :name: Nikolay
+  :patronymic: Petrovich
+  :phone_number: "+7(901)-333-22-11"
+  :telegram:
+  :email: nikolay_vasiliev@gmail.com
+  :git: https://github.com/nikolay_vasiliev
+  :birthdate: 21.03.1997
+- :id: 7
+  :surname: Sokolov
+  :name: Andrey
+  :patronymic: Igorevich
+  :phone_number:
+  :telegram: "@andrey_sokolov"
+  :email:
+  :git: https://github.com/andreysokolov
+  :birthdate: 05.08.2000
+- :id: 8
+  :surname: Kuznetsov
+  :name: Roman
+  :patronymic: Sergeevich
+  :phone_number: "+7(903)-777-66-55"
+  :telegram: "@roman_kuznetsov"
+  :email:
+  :git:
+  :birthdate: 12.04.1996
+- :id: 9
+  :surname: Popov
+  :name: Egor
+  :patronymic: Vladimirovich
+  :phone_number:
+  :telegram:
+  :email: egor_popov@gmail.com
+  :git: https://github.com/egorpopov
+  :birthdate: 30.06.1995
+- :id: 10
+  :surname: Novikov
+  :name: Mikhail
+  :patronymic: Olegovich
+  :phone_number: "+7(905)-555-44-33"
+  :telegram:
+  :email: mikhail_novikov@gmail.com
+  :git: https://github.com/mikhailnovikov
+  :birthdate: 17.09.1994
