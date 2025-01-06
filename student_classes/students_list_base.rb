@@ -47,6 +47,10 @@ class StudentsListBase
 	
 	def add_student(student_to_add)
 		begin
+			if !student_to_add.is_a?(Student)
+				raise StudentsListError, "Invalid argument: Expected a Student object."
+			end
+			
 			if self.students.any? { |existing_student| existing_student == student_to_add }
 				raise StudentsListError, "Cannot add student: A student with the same git or contact already exists."
 			end
