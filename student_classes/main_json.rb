@@ -4,7 +4,7 @@ require_relative 'student_short.rb'
 require_relative 'binary_tree.rb'
 require_relative 'data_table.rb'
 require_relative 'data_list_student_short.rb'
-require_relative 'student_list_json.rb'
+require_relative 'students_list_json.rb'
 
 begin
 	first_student = Student.new(
