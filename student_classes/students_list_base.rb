@@ -4,8 +4,11 @@ require_relative './student_short.rb'
 class StudentsListError < StandardError; end
 
 class StudentsListBase
-	def initialize(file_path)
+	attr_accessor :file_path, :strategy
+	
+	def initialize(file_path, strategy)
 		self.file_path = file_path
+		self.strategy = strategy
 		self.students = []
 	end
 	
@@ -92,17 +95,17 @@ class StudentsListBase
 		return self.students.size
 	end
 	
-	protected
-	
 	def read_from_file
-		raise NotImplementedError, "Method not implemented in the StudentsListBase class"
+		read_students = self.strategy.read_from_file(self.file_path)
+		
+		read_students.map { |student| add_student(student) }
 	end
 	
 	def write_to_file
-		raise NotImplementedError, "Method not implemented in the StudentsListBase class"
+		self.strategy.write_to_file(self.file_path, self.students)
 	end
 	
 	private
 	
-	attr_accessor :file_path, :students
+	attr_accessor :students
 end

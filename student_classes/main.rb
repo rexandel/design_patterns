@@ -4,7 +4,9 @@ require_relative 'student_short.rb'
 require_relative 'binary_tree.rb'
 require_relative 'data_table.rb'
 require_relative 'data_list_student_short.rb'
-require_relative 'students_list_yaml.rb'
+require_relative 'students_list_base.rb'
+require_relative 'json_strategy.rb'
+require_relative 'yaml_strategy.rb'
 
 begin
 	first_student = Student.new(
@@ -122,15 +124,12 @@ begin
 		tenth_student
 	]
 	
-	file_name = 'students.yaml'
+	json_file_name = 'students.json'
+	yaml_file_name = 'students.yaml'
 	
-	student_list_yaml = StudentsListYAML.new(file_name)
+	student_list_base = StudentsListBase.new(json_file_name, JSONStrategy)
 	
-	# array_of_students.each { |student| student_list_yaml.add_student(student) }
-	
-	# student_list_yaml.write_to_file
-	
-	student_list_yaml.read_from_file
+	# array_of_students.each { |student| student_list_base.add_student(student) }
 	
 	puts "\n\n"
 	
@@ -139,13 +138,13 @@ begin
 	
 	loop do
 		system('cls')
-		puts "Count Of Students: #{student_list_yaml.get_student_short_count}"
+		puts "Count Of Students: #{student_list_base.get_student_short_count}"
 		puts "Current page: #{current_page}"
 		puts "Current page_size: #{page_size}"
 		
 		puts "Students:"
 		
-		data_list_student_short = student_list_yaml.get_k_n_student_short_list(current_page, page_size)
+		data_list_student_short = student_list_base.get_k_n_student_short_list(current_page, page_size)
 		data_table_student_short = data_list_student_short.get_data
 		puts data_table_student_short
 		
@@ -162,6 +161,39 @@ begin
 		when 'q'
 			puts "Exiting..."
 			break
+		when 'ij'
+			student_list_base.file_path = json_file_name
+			student_list_base.strategy = JSONStrategy
+			student_list_base.write_to_file
+			puts "JSON import completed successfully!"
+			puts "Press Enter to continue..."
+			gets
+		when 'iy'
+			student_list_base.file_path = yaml_file_name
+			student_list_base.strategy = YAMLStrategy
+			student_list_base.write_to_file
+			puts "YAML import completed successfully!"
+			puts "Press Enter to continue..."
+			gets
+		when 'ej'
+			student_list_base.file_path = json_file_name
+			student_list_base.strategy = JSONStrategy
+			student_list_base.read_from_file
+			puts "JSON export completed successfully!"
+			puts "Press Enter to continue..."
+			gets
+		when 'ey'
+			student_list_base.file_path = yaml_file_name
+			student_list_base.strategy = YAMLStrategy
+			student_list_base.read_from_file
+			puts "YAML export completed successfully!"
+			puts "Press Enter to continue..."
+			gets
+		when 'r'
+			array_of_students.each { |student| student_list_base.add_student(student) }
+			puts "Data restore completed!"
+			puts "Press Enter to continue..."
+			gets
 		else
 			puts "Invalid choice. Please try again."
 		end
